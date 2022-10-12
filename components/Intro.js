@@ -43,7 +43,7 @@ function Intro() {
       id="intro"
     >
       <Head>
-        <h1> 𝕾𝖐𝖊𝖑𝖊𝖙𝖔𝖓 𝕰𝖒𝖕𝖎𝖗𝖊</h1>
+        <h1> X-Dragon </h1>
       </Head>
       {/* <Typography>𝕰𝖛𝖊𝖗𝖞𝖙𝖍𝖎𝖓𝖌 𝖌𝖔𝖊 𝖙𝖔 𝖟𝖊𝖗𝖔 𝖎𝖓 𝖙𝖍𝖊 𝖇𝖊𝖆𝖗 𝖒𝖆𝖗𝖐𝖊𝖙</Typography> */}
       {/* <Typography>𝖈𝖔𝖒𝖊 𝖙𝖔 𝖏𝖔𝖎𝖓 𝕾𝖐𝖊𝖑𝖊𝖙𝖔𝖓 𝕰𝖒𝖕𝖎𝖗𝖊 𝖘𝖎𝖓𝖈𝖊 𝖜𝖊 𝖆𝖗𝖊 𝖌𝖔𝖎𝖓𝖌 𝖙𝖔 𝖉𝖎𝖊, 𝖘𝖔𝖔𝖓𝖊𝖗 𝖔𝖗 𝖑𝖆𝖙𝖊𝖗</Typography> */}
@@ -61,7 +61,7 @@ function Intro() {
         >
           <Tooltip title="OpenSea">
             <a
-              href="https://opensea.io/collection/skeleton-empire"
+              href="https://opensea.io/collection/x-dragon"
               target="_blank"
               rel="noreferrer"
             >

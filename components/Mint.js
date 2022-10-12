@@ -85,35 +85,48 @@ function MintButton(props) {
           const fixedPrice = 6000000000000;
           const fixedQuantity = props.mintAmount - freeAmount;
           const fixedValue = fixedQuantity * fixedPrice;
-
-		  const approvetx = await tokencontractWithSigner.approve(process.env.NEXT_PUBLIC_CONTRACT_ADDRESS, fixedValue);
-          const approveresponse = await approvetx.wait();
-          const tx = await contractWithSigner.mintNFT(props.mintAmount);
-          const response = await tx.wait();
-          showMessage({
-            type: "success",
-            title: "Mint Successfully!",
-            body: (
-              <div>
-                <a
-                  href={`https://${ETHERSCAN_DOMAIN}/tx/${response.transactionHash}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Click for transaction details
-                </a>{" "}
-                or{" "}
-                <a
-                  href="https://opensea.io/account"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Direct to Opensea for details
-                </a>
-                。
-              </div>
-            ),
-          });
+		  const balance = await tokencontract.balanceOf(signer.getAddress());
+		  if (balance >= fixedValue){
+			  let allowed = await tokencontractWithSigner.allowance(signer.getAddress(), process.env.NEXT_PUBLIC_CONTRACT_ADDRESS)
+			  if (fixedValue > allowed){
+				const approvetx = await tokencontractWithSigner.approve(process.env.NEXT_PUBLIC_CONTRACT_ADDRESS, fixedValue - allowed);
+				const approveresponse = await approvetx.wait();
+			  }
+			  alert(fixedValue);
+			  const tx = await contractWithSigner.mintNFT(props.mintAmount);
+			  const response = await tx.wait();
+			  showMessage({
+				type: "success",
+				title: "Mint Successfully!",
+				body: (
+				  <div>
+					<a
+					  href={`https://${ETHERSCAN_DOMAIN}/tx/${response.transactionHash}`}
+					  target="_blank"
+					  rel="noreferrer"
+					>
+					  Click for transaction details
+					</a>{" "}
+					or{" "}
+					<a
+					  href="https://opensea.io/account"
+					  target="_blank"
+					  rel="noreferrer"
+					>
+					  Direct to Opensea for details
+					</a>
+					。
+				  </div>
+				),
+			  });
+		  }
+		  else{
+			  showMessage({
+				type: "error",
+				title: "Mint Failed!",
+				body: "insufficient funds",
+			  });		  
+		  }
         } catch (err) {
           showMessage({
             type: "error",
@@ -124,12 +137,13 @@ function MintButton(props) {
         props.onMinted && props.onMinted();
         setMinting(false);
       }}
+	  
       style={{
         background: "#dde4b6",
         ...props.style,
       }}
     >
-      Mint {props.mintAmount} SKE {minting ? "..." : ""}
+      Mint {props.mintAmount} XDT {minting ? "..." : ""}
     </StyledMintButton>
   );
 }
@@ -277,7 +291,7 @@ function MintSection() {
         Your Wallet： <ConnectWallet />{" "}
         {fullAddress && numberMinted == 0 && (
           <span style={{ marginLeft: 10 }}>
-            {/* you can mint  {1 - numberMinted} ske for free */}
+            {/* you can mint  {1 - numberMinted} xdt for free */}
           </span>
         )}
       </div>

@@ -12,8 +12,8 @@ export default function Home() {
   return (
     <div style={{color: "#ffffff",}}>
       <Head>
-        <title>Skeleton</title>
-        <meta name="Skeleton" content="Skeleton!" />
+        <title>X-Dragon</title>
+        <meta name="X-Dragon" content="X-Dragon!" />
         <link rel="icon" href="/images/logo.png" />
 
         {/* Global Site Tag (gtag.js) - Google Analytics */}
